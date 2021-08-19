@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "LoFoodTruck",
+    "slug": "LoFoodTruck",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "LoFoodTruck"
+}
