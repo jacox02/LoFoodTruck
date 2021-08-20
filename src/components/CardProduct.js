@@ -3,29 +3,86 @@ import { View, Image, Text, StyleSheet, Alert } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Contador from "../components/Contador";
+
 export default class CardProduct extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      products: [
+        {
+          Key: 1,
+          title: "Big Burguer Queso",
+          Description: "Lorem ipsum solor sit amet,",
+          image:
+            "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c1a8.png",
+          price: "$" + 12.58,
+        },
+        {
+          Key: 2,
+          title: "Big Burguer Queso",
+          Description: "Lorem ipsum solor sit amet,",
+          image:
+            "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c1a8.png",
+          price: "$" + 12.58,
+        },
+        {
+          Key: 3,
+          title: "Big Burguer Queso",
+          Description: "Lorem ipsum solor sit amet,",
+          image:
+            "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c1a8.png",
+          price: "$" + 12.58,
+        },
+        {
+          Key: 4,
+          title: "Big Burguer Queso",
+          Description: "Lorem ipsum solor sit amet,",
+          image:
+            "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c1a8.png",
+          price: "$" + 12.58,
+        },
+        {
+          Key: 5,
+          title: "Big Burguer Queso",
+          Description: "Lorem ipsum solor sit amet,",
+          image:
+            "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c1a8.png",
+          price: "$" + 12.58,
+        },
+      ],
+    };
+    card = () => {
+      return this.state.products.map((element) => {
+        return (
+          <ScrollView>
+            <View key={element.Key} style={styles.container}>
+              <Image source={{ uri: element.image }} style={styles.img} />
+              <MaterialCommunityIcons
+                onPress={() => Alert.alert("Eliminado")}
+                style={styles.icon}
+                name="delete-circle"
+                size={35}
+                color="red"
+              />
+              <Text style={styles.title}>{element.title}</Text>
+              <Text style={styles.subtitle}>{element.Description}</Text>
+              <Text style={styles.price}>{element.price}</Text>
+              <Contador style={styles.contador}></Contador>
+            </View>
+          </ScrollView>
+        );
+      });
+    };
+  }
+
   render() {
     return (
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        style={{ marginTop: 25 }}
+        style={{ marginTop: 30 }}
       >
-        <View style={styles.container}>
-          <Image source={require("../images/5.png")} style={styles.img} />
-
-          <MaterialCommunityIcons
-            onPress={() => Alert.alert("Eliminado")}
-            style={styles.icon}
-            name="delete-circle"
-            size={35}
-            color="red"
-          />
-          <Text style={styles.title}>Big Burguer Queso</Text>
-          <Text style={styles.subtitle}>Lorem ipsum dolor sit amet,</Text>
-          <Text style={styles.price}>$12.58</Text>
-          <Contador style={styles.contador}></Contador>
-        </View>
+        {card()}
       </ScrollView>
     );
   }

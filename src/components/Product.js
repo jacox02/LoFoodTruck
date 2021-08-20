@@ -1,78 +1,146 @@
-import React from "react";
-import { View, Image, Text, StyleSheet, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Image, Text, StyleSheet, ToastAndroid } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
+// export default class Product extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       products: [],
+//     };
+
+//     const getMovies = async () => {
+//       try {
+//         const response = await fetch("https://api.publicapis.org/random");
+//         const json = await response.json();
+//         this.state.products = json.entries;
+//       } catch (error) {
+//         console.error(error);
+//       }
+//     };
+//     this.componentDidMount = () => {
+//       getMovies();
+//     };
+
+//     card = () => {
+//       return this.state.products.map((element) => {
+//         return (
+//           <ScrollView>
+//             <View style={styles.container} key={element.Key}>
+//               <Image source={require("../images/5.png")} style={styles.img} />
+//               <AntDesign
+//                 style={styles.icon}
+//                 name="heart"
+//                 size={20}
+//                 color="red"
+//               />
+//               <Text style={styles.title}>{element.API}</Text>
+//               <Text style={styles.subtitle}>{element.Description}</Text>
+//               <Text style={styles.price}>{element.Link}</Text>
+
+//               <AntDesign
+//                 onPress={() => ToastAndroid.show("Eliminado del carrito", 1000)}
+//                 style={styles.iconn}
+//                 name="rightcircleo"
+//                 size={24}
+//                 color="black"
+//               />
+
+//               {/* <AntDesign
+//                 onPress={() => Alert.alert("Eliminado")}
+//                 style={styles.iconn}
+//                 name="delete-outline"
+//                 size={24}
+//                 color="#42b883"
+//               /> */}
+//             </View>
+//           </ScrollView>
+//         );
+//       });
+//     };
+//   }
+
+//   render() {
+//     return (
+//       <ScrollView
+//         horizontal
+//         showsHorizontalScrollIndicator={false}
+//         style={{ marginTop: 25 }}
+//       >
+//         {card()}
+//       </ScrollView>
+//     );
+//   }
+// }
 
 const Product = ({ navigation }) => {
+  const [data, setData] = useState([]);
+
+  const getMovies = async () => {
+    try {
+      const response = await fetch("http://10.0.0.5:3000/api/food/random");
+      const json = await response.json();
+      console.log(json);
+      setData(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    getMovies();
+  }, []);
+
+  card = () => {
+    return data.map((element) => {
+      return (
+        <ScrollView>
+          <React.Fragment>
+            <View style={styles.container} key={element.food_id}>
+              <Image source={require("../images/5.png")} style={styles.img} />
+              <AntDesign
+                style={styles.icon}
+                name="heart"
+                size={20}
+                color="red"
+              />
+              <Text style={styles.title}>{element.food_name}</Text>
+              <Text style={styles.subtitle}>{element.food_price}</Text>
+              <Text style={styles.price}>${element.food_price}</Text>
+
+              <AntDesign
+                onPress={() => ToastAndroid.show("Eliminado del carrito", 1000)}
+                style={styles.iconn}
+                name="rightcircleo"
+                size={24}
+                color="black"
+              />
+
+              {/* <AntDesign
+              onPress={() => Alert.alert("Eliminado")}
+              style={styles.iconn}
+              name="delete-outline"
+              size={24}
+              color="#42b883"
+            /> */}
+            </View>
+          </React.Fragment>
+        </ScrollView>
+      );
+    });
+  };
+
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
       style={{ marginTop: 25 }}
     >
-      <View style={styles.container}>
-        <Image source={require("../images/5.png")} style={styles.img} />
-        <AntDesign style={styles.icon} name="heart" size={20} color="red" />
-        <Text style={styles.title}>Titulo</Text>
-        <Text style={styles.subtitle}>Sub titulo</Text>
-        <Text style={styles.price}>$12.58</Text>
-        <Button
-          title=">"
-          onPress={() => navigation.navigate("FoodScreen")}
-        ></Button>
-        <AntDesign
-          style={styles.iconn}
-          name="rightcircleo"
-          size={24}
-          color="#153E73"
-        />
-      </View>
-
-      <View style={styles.container}>
-        <Image source={require("../images/10.png")} style={styles.img} />
-        <AntDesign style={styles.icon} name="hearto" size={20} color="black" />
-        <Text style={styles.title}>Titulo</Text>
-        <Text style={styles.subtitle}>Sub titulo</Text>
-        <Text style={styles.price}>$12.58</Text>
-        <AntDesign
-          style={styles.iconn}
-          name="rightcircleo"
-          size={24}
-          color="#153E73"
-        />
-      </View>
-
-      <View style={styles.container}>
-        <Image source={require("../images/7.png")} style={styles.img} />
-        <AntDesign style={styles.icon} name="hearto" size={20} color="black" />
-        <Text style={styles.title}>Titulo</Text>
-        <Text style={styles.subtitle}>Sub titulo</Text>
-        <Text style={styles.price}>$12.58</Text>
-
-        <AntDesign
-          style={styles.iconn}
-          name="rightcircleo"
-          size={24}
-          color="#153E73"
-        />
-      </View>
-
-      <View style={styles.container}>
-        <Image source={require("../images/6.png")} style={styles.img} />
-        <AntDesign style={styles.icon} name="hearto" size={20} color="black" />
-        <Text style={styles.title}>Titulo</Text>
-        <Text style={styles.subtitle}>Sub titulo</Text>
-        <Text style={styles.price}>$12.58</Text>
-        <AntDesign
-          style={styles.iconn}
-          name="rightcircleo"
-          size={24}
-          color="#153E73"
-        />
-      </View>
+      {card()}
     </ScrollView>
   );
 };
+export default Product;
 const styles = StyleSheet.create({
   container: {
     width: 174,
@@ -109,22 +177,22 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 12,
     marginTop: 130,
-    marginLeft: -150,
+    marginLeft: -147,
     color: "#515F65",
   },
   subtitle: {
     fontWeight: "bold",
     fontSize: 10,
     marginTop: 150,
-    marginLeft: -30,
+    marginLeft: -20,
     color: "#515F65",
   },
   price: {
     fontWeight: "bold",
     fontSize: 12,
     marginTop: 170,
-    marginLeft: -40,
-    color: "#4A69FF",
+    marginLeft: -42,
+    color: "#153E73",
   },
   icon: {
     marginTop: 1,
@@ -135,4 +203,3 @@ const styles = StyleSheet.create({
     marginLeft: 80,
   },
 });
-export default Product;

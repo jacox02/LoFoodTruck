@@ -16,7 +16,7 @@ export default class CategoriesRow extends Component {
   }
   categoriesList() {
     return this.state.categories.map((data) => {
-let path = `${data.image}`;
+      let path = `${data.image}`;
       return (
         <View style={styles.container} key={data.text}>
           <Image source={path} style={styles.img} />

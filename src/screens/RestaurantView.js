@@ -1,10 +1,9 @@
 import React from 'react';
 import {View,Text,ScrollView, ImageBackground, Dimensions, StyleSheet } from "react-native";
 import { MaterialIcons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
-import Ingredients from '../components/Ingredients';
+import Product from '../components/Product';
 
-const FoodView = () => {
+const RestaurantView = () => {
     return (
     <ScrollView
     style={{
@@ -17,48 +16,39 @@ const FoodView = () => {
     <ImageBackground
     source={require('../images/Background.jpg')}
     style={{
-        height: Dimensions.get('window').height / 2.2
+        height: Dimensions.get('window').height / 3.0
     }}
     >
         <View>
-        <MaterialIcons style={styles.icon} name="keyboard-arrow-left" size={25} color="white" />
-        <Text style={styles.title}>
-        Hamburguesa especial</Text>
+        <MaterialIcons style={styles.icon} name="keyboard-arrow-left" size={35} color="white" />
+        
         </View>
     </ImageBackground>
   
     <View style={styles.bottomView}>
     
-       <View style={{padding:40}}>
-        <Text style={{color:'#153E73',fontSize:18, fontWeight:'bold'}}>Descripción</Text>
-        <Text style={{color:'#153E73',fontSize:12, top:10}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor 
+       <View style={{padding:50}}>
+       <Text style={{color:'#153E73',fontSize:23, fontWeight:'bold',bottom:15}}>Los goldos</Text>
+        <Text style={{color:'#153E73',fontSize:16, fontWeight:'bold'}}>Descripción</Text>
+        <Text style={{color:'#153E73',fontSize:12, top:5}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor 
             invidunt ut labore et dolore magna aliquyam erat.
             </Text>
+            <Text style={{color:'#153E73',fontSize:16, fontWeight:'bold', top:10}}>Dirección</Text>
+            <Text style={{color:'#153E73',fontSize:12, top:10}}>invidunt ut labore et dolore magna aliquyam erat.</Text>
         </View> 
-        <View>
-        <Text style={{color:'#153E73',fontSize:18,fontWeight:'bold',paddingLeft:40}}>Ingredientes</Text>
-        <Text style={{color:'#9A9A9A',fontSize:10,left:315,top:-25}}>10 ingredientes</Text>
-        <ScrollView>
-        <Ingredients></Ingredients>
+        <View style={{top:-35}}>
+        <Text style={{color:'#153E73',fontSize:16,fontWeight:'bold',paddingLeft:50, bottom:-15}}>Productos</Text>
+        <ScrollView style={{left:35}}>
+        <Product></Product>
     </ScrollView>
         </View>
-    </View>
-    <View>
-    <LinearGradient
-         start={{x: 0, y: 0.5}}
-         end={{x: 1, y: 1}}
-        colors={['#4A69FF', '#20D0C4']}
-        style={styles.button}>
-        <Text style={styles.text}>Agregar al carrito</Text>
-      </LinearGradient> 
-      <Text style={{fontSize:26,color:'#153E73',fontWeight:'bold',left:310,top:-45}}>$22.99</Text>
     </View>
     
     </ScrollView>
     );
   };
   
-  export default FoodView;
+  export default RestaurantView;
 
   const styles = StyleSheet.create({
       bottomView:{
@@ -72,9 +62,9 @@ const FoodView = () => {
       },
       title:{
           color:'#ffffff',
-          fontSize:16,
+          fontSize:18,
           fontWeight:'bold',
-          left:115,
+          left:170,
           top:30,
       },
       icon:{

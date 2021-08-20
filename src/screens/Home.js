@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TextInput, Button } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, TextInput, Image } from "react-native";
+import CardCategorie from "../components/CardCategorie";
+import Product from "../components/Product";
 import { ScrollView } from "react-native-gesture-handler";
 
-import CategoriesRow from "../components/CategoriesRow";
-import Product from "../components/Product";
-
-const Home = ({ navigation }) => {
+const Home = () => {
   return (
     <ScrollView>
       <View
@@ -62,9 +61,8 @@ const Home = ({ navigation }) => {
             VerTodos
           </Text>
         </View>
-        <CategoriesRow></CategoriesRow>
+        <CardCategorie></CardCategorie>
       </ScrollView>
-
       <Text
         style={{
           color: "#4A69FF",
@@ -74,19 +72,11 @@ const Home = ({ navigation }) => {
           marginLeft: 20,
         }}
       >
-        Explorar categorias
+        Populares
       </Text>
-
+      {/* Productos */}
       <ScrollView>
         <Product></Product>
-        <Button
-          title="Go to Carrito"
-          onPress={() => navigation.navigate("CarritoScreen")}
-        />
-        <Button
-          title="Go to Food View"
-          onPress={() => navigation.navigate("FoodScreen")}
-        />
       </ScrollView>
     </ScrollView>
   );
@@ -94,9 +84,11 @@ const Home = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   input: {
+    textAlign: "center",
     height: 33,
     width: 358,
     margin: 12,
+    borderWidth: 1,
     borderRadius: 15,
     borderColor: "#E2EDF2",
     color: "#E2EDF2",
@@ -115,5 +107,4 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
 });
-
 export default Home;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, View, TextInput, Button } from "react-native";
-// import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
 import { ToastAndroid } from "react-native";
 
 const SignUpScreen = () => {
