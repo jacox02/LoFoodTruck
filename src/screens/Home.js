@@ -3,10 +3,11 @@ import { View, Text, StyleSheet, TextInput, Image } from "react-native";
 import CardCategorie from "../components/CardCategorie";
 import Product from "../components/Product";
 import { ScrollView } from "react-native-gesture-handler";
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Home = () => {
   return (
-    <ScrollView>
+    <ScrollView style={{backgroundColor:'#fff'}}>
       <View
         style={{
           flex: 1,
@@ -21,28 +22,19 @@ const Home = () => {
           shadowOpacity: 0.34,
           shadowRadius: 6.27,
 
-          elevation: 2,
+          elevation: 0,
         }}
       >
         <View
           style={{
             width: 414,
-            height: 131,
+            height: 80,
           }}
         >
-          <Text
-            style={{
-              fontSize: 22,
-              color: "#4A69FF",
-              textAlign: "center",
-              marginTop: 30,
-              fontWeight: "bold",
-            }}
-          >
-            Inicio
-          </Text>
-          <View>
-            <TextInput style={styles.input} placeholder={"Buscar"} />
+         
+          <View style={styles.passwordContainer}>
+            <MaterialCommunityIcons style={styles.Icon}name="magnify" color={'#4A69FF'} size={20}/>
+            <TextInput style={{flex: 1,}} placeholder={"Buscar"} underlineColorAndroid="transparent"/>
           </View>
         </View>
       </View>
@@ -83,18 +75,6 @@ const Home = () => {
 };
 
 const styles = StyleSheet.create({
-  input: {
-    textAlign: "center",
-    height: 33,
-    width: 358,
-    margin: 12,
-    borderWidth: 1,
-    borderRadius: 15,
-    borderColor: "#E2EDF2",
-    color: "#E2EDF2",
-    marginLeft: 30,
-    elevation: 1,
-  },
   title: {
     color: "#4A69FF",
     fontSize: 16,
@@ -106,5 +86,22 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
   },
+  passwordContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderWidth: 0.8,
+    borderColor: '#4A69FF',
+    height: 40,
+    borderRadius: 15,
+    margin: 10,
+  },
+  Icon:{
+    padding: 10,
+    margin: 5,
+    resizeMode: 'stretch',
+    alignItems: 'center',
+  }
 });
 export default Home;

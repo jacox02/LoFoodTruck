@@ -7,21 +7,14 @@ import Carrito from "./src/screens/Carrito";
 import Home from "./src/screens/Home";
 import FoodScreen from "./src/screens/FoodView";
 import Product from "./src/components/Product";
+import Tabs from "./src/navigation/tabs"
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="HomeScreen"
-          component={Home}
-          options={{ title: "My home" }}
-        />
-        <Stack.Screen name="CarritoScreen" component={Carrito} />
-        <Stack.Screen name="FoodScreen" component={FoodScreen} />
-      </Stack.Navigator>
+      <Tabs></Tabs>
     </NavigationContainer>
   );
 }

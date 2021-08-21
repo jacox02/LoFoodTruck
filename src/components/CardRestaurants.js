@@ -59,6 +59,7 @@ export default class CardRestaurants extends React.Component {
               <Text style={styles.direction}>{element.direction}</Text>
               <Text style={styles.category}>{element.category}</Text>
               <AntDesign
+                
                 style={styles.iconn}
                 name="rightcircleo"
                 size={25}
