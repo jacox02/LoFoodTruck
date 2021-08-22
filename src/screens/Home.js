@@ -5,7 +5,7 @@ import Product from "../components/Product";
 import { ScrollView } from "react-native-gesture-handler";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-const Home = () => {
+export default function Home () {
   return (
     <ScrollView style={{ backgroundColor: "#fff" }}>
       <View
@@ -112,4 +112,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
 });
-export default Home;
+

@@ -34,16 +34,9 @@ export default function CardRestaurants({ navigation }) {
                 style={styles.img}
               />
               <Text style={styles.title}>{element.restaurant_name}</Text>
-              <Text style={styles.direction}>{element.restaurant_address}</Text>
               <Text style={styles.category}>{element.category_name}</Text>
-              <Button
-                title="Bobo"
-                onPress={() => {
-                  navigation.navigate("Details", {
-                    restaurantId: element.restaurant_id,
-                  });
-                }}
-              ></Button>
+              <Text style={styles.direction}>{element.restaurant_address}</Text>
+              
               <AntDesign
                 style={styles.iconn}
                 name="rightcircleo"
@@ -187,14 +180,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 18,
     marginTop: 11,
-    marginLeft: 30,
+    marginLeft: 40,
     color: "#515F65",
   },
   direction: {
     fontWeight: "bold",
     fontSize: 10,
     marginTop: 60,
-    marginLeft: -79,
+    marginLeft: -90,
     color: "#515F65",
   },
   category: {

@@ -1,8 +1,7 @@
 import React from "react";
 import { View, Image, Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-export default class CardCategorie extends React.Component {
-  render() {
+export default function CardCategorie () {
     return (
       <ScrollView
         horizontal
@@ -30,7 +29,7 @@ export default class CardCategorie extends React.Component {
         </View>
       </ScrollView>
     );
-  }
+  
 }
 const styles = StyleSheet.create({
   container: {
