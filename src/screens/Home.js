@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, Image } from "react-native";
-import CardCategorie from "../components/CardCategorie";
-import Product from "../components/Product";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  ToastAndroid,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 export default function Home({ navigation }) {
   const [Food, setFood] = useState([]);
+  const [Categories, setCategories] = useState([]);
 
   const getFood = async () => {
     try {
@@ -20,8 +27,19 @@ export default function Home({ navigation }) {
       console.error(error);
     }
   };
-
+  const getCategories = async () => {
+    try {
+      const response = await fetch(
+        "https://lofoodtruckapi.herokuapp.com/api/food/categories"
+      );
+      const json = await response.json();
+      setCategories(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
   useEffect(() => {
+    getCategories();
     getFood();
   }, []);
 
@@ -80,7 +98,36 @@ export default function Home({ navigation }) {
             VerTodos
           </Text>
         </View>
-        <CardCategorie></CardCategorie>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{ marginTop: 25 }}
+        >
+          {Categories.map((category) => (
+            <TouchableOpacity
+              style={styles.categoriesContainer}
+              onPress={() => {
+                ToastAndroid.show(
+                  'Cargando',
+                  5000
+                );
+                navigation.navigate("FoodByCategory", {
+                  categoryID: category.category_id,
+                  categoryName: category.category_name,
+                });
+
+              }}
+            >
+              <Image
+                source={{ uri: category.category_image }}
+                style={styles.imgCategories}
+              />
+              <Text style={styles.titleCategories}>
+                {category.category_name}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </ScrollView>
       <Text
         style={{
@@ -93,7 +140,6 @@ export default function Home({ navigation }) {
       >
         Populares
       </Text>
-      {/* Productos */}
       <ScrollView horizontal showsHorizontalScrollIndicator={true}>
         {Food.map((element) => {
           return (
@@ -141,7 +187,28 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginLeft: 15,
     fontWeight: "bold",
-    marginTop:5,
+    marginTop: 5,
+  },
+  imgCategories: { height: 30, width: 30, left: -1 },
+  titleCategories: {
+    fontWeight: "bold",
+    fontSize: 12,
+    paddingLeft: 0,
+    color: "#fff",
+    textAlign: "center",
+  },
+  categoriesContainer: {
+    flex: 1,
+    width: 90,
+    height: 60,
+    alignItems: "center",
+    flexDirection: "column",
+    backgroundColor: "#4A69FF",
+    marginHorizontal: 15,
+    borderRadius: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 15,
+    opacity: 0.8,
   },
   container: {
     flex: 1,

@@ -12,6 +12,7 @@ import Carrito from "./src/screens/Carrito";
 import Restaurants from "./src/screens/Restaurants";
 
 import RestaurantDetail from "./src/screens/RestaurantView";
+import FoodByCategory from "./src/screens/FoodByCategory";
 import FoodDetail from "./src/screens/FoodView";
 
 const Stack = createNativeStackNavigator();
@@ -66,24 +67,36 @@ export default function App() {
           animation: "slide_from_right",
         }}
       >
-        <Stack.Screen name="STACK" component={MainTabNavigator} options={{
-          headerShown: false
-        }}></Stack.Screen>
+        <Stack.Screen
+          name="STACK"
+          component={MainTabNavigator}
+          options={{
+            headerShown: false,
+          }}
+        ></Stack.Screen>
 
         <Stack.Screen
-        options={{
-          headerShown: false
-        }}
+          options={{
+            headerShown: false,
+          }}
           name="RestaurantDetail"
           component={RestaurantDetail}
         ></Stack.Screen>
-
-        <Stack.Screen 
+        <Stack.Screen
           options={{
-            headerShown: false
+            headerShown: false,
           }}
-          name="FoodDetail" 
-          component={FoodDetail} ></Stack.Screen>
+          name="FoodByCategory"
+          component={FoodByCategory}
+        ></Stack.Screen>
+
+        <Stack.Screen
+          options={{
+            headerShown: false,
+          }}
+          name="FoodDetail"
+          component={FoodDetail}
+        ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );

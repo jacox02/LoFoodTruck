@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import Product from "../components/Product";
 
 const RestaurantView = ({ route, navigation }) => {
   const { restaurantID } = route.params;
