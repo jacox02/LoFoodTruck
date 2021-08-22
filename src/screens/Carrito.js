@@ -24,7 +24,6 @@ export default class Carrito extends Component {
     const state = this.state;
     return (
       <View>
-       
         <ScrollView style={{ marginBottom: 10 }}>
           <CardProduct></CardProduct>
         </ScrollView>
