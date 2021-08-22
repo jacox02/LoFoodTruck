@@ -1,24 +1,20 @@
-
 import * as React from "react";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import Home from "../screens/Home"
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Home from "../screens/Home";
 import Carrito from "../screens/Carrito";
 import Restaurants from "../screens/Restaurants";
+
 const Tab = createBottomTabNavigator();
 
 function Tabs() {
   return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      activeColor="#e91e63"
-
-    >
+    <Tab.Navigator initialRouteName="Home" activeColor="#e91e63">
       <Tab.Screen
         name="Home"
         component={Home}
         options={{
-          tabBarLabel: 'Home',
+          tabBarLabel: "Home",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={26} />
           ),
@@ -28,9 +24,13 @@ function Tabs() {
         name="Carrito"
         component={Carrito}
         options={{
-          tabBarLabel: 'Carrito',
+          tabBarLabel: "Carrito",
           tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="shopping-outline" color={color} size={26} />
+            <MaterialCommunityIcons
+              name="shopping-outline"
+              color={color}
+              size={26}
+            />
           ),
         }}
       />
@@ -38,7 +38,7 @@ function Tabs() {
         name="Restaurants"
         component={Restaurants}
         options={{
-          tabBarLabel: 'Profile',
+          tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="store" color={color} size={26} />
           ),

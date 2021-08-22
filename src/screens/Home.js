@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, TextInput, Image } from "react-native";
 import CardCategorie from "../components/CardCategorie";
 import Product from "../components/Product";
 import { ScrollView } from "react-native-gesture-handler";
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Home = () => {
   return (
-    <ScrollView style={{backgroundColor:'#fff'}}>
+    <ScrollView style={{ backgroundColor: "#fff" }}>
       <View
         style={{
           flex: 1,
@@ -31,10 +31,18 @@ const Home = () => {
             height: 80,
           }}
         >
-         
           <View style={styles.passwordContainer}>
-            <MaterialCommunityIcons style={styles.Icon}name="magnify" color={'#4A69FF'} size={20}/>
-            <TextInput style={{flex: 1,}} placeholder={"Buscar"} underlineColorAndroid="transparent"/>
+            <MaterialCommunityIcons
+              style={styles.Icon}
+              name="magnify"
+              color={"#4A69FF"}
+              size={20}
+            />
+            <TextInput
+              style={{ flex: 1 }}
+              placeholder={"Buscar"}
+              underlineColorAndroid="transparent"
+            />
           </View>
         </View>
       </View>
@@ -87,21 +95,21 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   passwordContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
     borderWidth: 0.8,
-    borderColor: '#4A69FF',
+    borderColor: "#4A69FF",
     height: 40,
     borderRadius: 15,
     margin: 10,
   },
-  Icon:{
+  Icon: {
     padding: 10,
     margin: 5,
-    resizeMode: 'stretch',
-    alignItems: 'center',
-  }
+    // resizeMode: "stretch",
+    alignItems: "center",
+  },
 });
 export default Home;
