@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Image, Text, StyleSheet, Button } from "react-native";
+import { View, Image, Text, StyleSheet } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 
@@ -12,7 +12,6 @@ export default function CardRestaurants({ navigation }) {
         "https://lofoodtruckapi.herokuapp.com/api/food/restaurants/all"
       );
       const json = await response.json();
-      console.log(json);
       setRestaurants(json);
     } catch (error) {
       console.error(error);
@@ -36,15 +35,13 @@ export default function CardRestaurants({ navigation }) {
               <Text style={styles.title}>{element.restaurant_name}</Text>
               <Text style={styles.direction}>{element.restaurant_address}</Text>
               <Text style={styles.category}>{element.category_name}</Text>
-              <Button
-                title="Bobo"
+              <AntDesign
                 onPress={() => {
-                  navigation.navigate("Details", {
-                    restaurantId: element.restaurant_id,
+                  navigation.navigate("RestaurantDetail", {
+                    itemId: 86,
+                    otherParam: "anything you want here",
                   });
                 }}
-              ></Button>
-              <AntDesign
                 style={styles.iconn}
                 name="rightcircleo"
                 size={25}
@@ -63,92 +60,41 @@ export default function CardRestaurants({ navigation }) {
       showsVerticalScrollindicator={true}
       style={{ marginTop: 40 }}
     >
-      {restaurantsCard()}
+      {Restaurants.map((element) => {
+        return (
+          <ScrollView>
+            <React.Fragment>
+              <View style={styles.container} Key={element.restaurant_id}>
+                <Image
+                  source={{ uri: element.restaurant_image }}
+                  style={styles.img}
+                />
+                <Text style={styles.title}>{element.restaurant_name}</Text>
+                <Text style={styles.direction}>
+                  {element.restaurant_address}
+                </Text>
+                <Text style={styles.category}>{element.category_name}</Text>
+                <AntDesign
+                  onPress={() => {
+                    navigation.navigate("RestaurantDetail", {
+                      itemId: 86,
+                      otherParam: "anything you want here",
+                    });
+                  }}
+                  style={styles.iconn}
+                  name="rightcircleo"
+                  size={25}
+                  color="#153E73"
+                />
+              </View>
+            </React.Fragment>
+          </ScrollView>
+        );
+      })}
     </ScrollView>
   );
 }
 
-// export default class CardRestaurants extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       Restaurant: [
-//         {
-//           Key: 1,
-//           name: "Los Jefes",
-//           direction: "Av.Gustavo Mejia Ricar 66-68 Santo Domingo",
-//           category: "comida Rapida",
-//           image:
-//             "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c1a8.png",
-//         },
-//         {
-//           Key: 2,
-//           name: "Los Jefes",
-//           direction: "Av.Gustavo Mejia Ricar 66-68 Santo Domingo",
-//           category: "comida Rapida",
-//           image:
-//             "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c1a8.png",
-//         },
-//         {
-//           Key: 2,
-//           name: "Los Jefes",
-//           direction: "Av.Gustavo Mejia Ricar 66-68 Santo Domingo",
-//           category: "comida Rapida",
-//           image:
-//             "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c1a8.png",
-//         },
-//         {
-//           Key: 4,
-//           name: "Los Jefes",
-//           direction: "Av.Gustavo Mejia Ricar 66-68 Santo Domingo",
-//           category: "comida Rapida",
-//           image:
-//             "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c1a8.png",
-//         },
-//         {
-//           Key: 5,
-//           name: "Los Jefes",
-//           direction: "Av.Gustavo Mejia Ricar 66-68 Santo Domingo",
-//           category: "comida Rapida",
-//           image:
-//             "http://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c1a8.png",
-//         },
-//       ],
-//     };
-//     card = () => {
-//       return this.state.Restaurant.map((element) => {
-//         return (
-//           <ScrollView>
-//             <View Key={element.Key} style={styles.container}>
-//               <Image source={{ url: element.image }} style={styles.img} />
-//               <Text style={styles.title}>{element.name}</Text>
-//               <Text style={styles.direction}>{element.direction}</Text>
-//               <Text style={styles.category}>{element.category}</Text>
-//               <AntDesign
-
-//                 style={styles.iconn}
-//                 name="rightcircleo"
-//                 size={25}
-//                 color="#153E73"
-//               />
-//             </View>
-//           </ScrollView>
-//         );
-//       });
-//     };
-//   }
-//   render() {
-//     return (
-//       <ScrollView
-//         vertical
-//         showsVerticalScrollindicator={true}
-//         style={{ marginTop: 40 }}
-//       >
-//         {card()}
-//       </ScrollView>
-//     );
-//   }
-// }
 const styles = StyleSheet.create({
   container: {
     width: 350,

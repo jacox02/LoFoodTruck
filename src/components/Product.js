@@ -40,20 +40,12 @@ const Product = ({ navigation }) => {
               <Text style={styles.price}>${element.food_price}</Text>
 
               <AntDesign
-                onPress={() => ToastAndroid.show("Eliminado del carrito", 1000)}
+                onPress={() => navigation.navigate("FoodDetail")}
                 style={styles.iconn}
                 name="rightcircleo"
                 size={24}
                 color="black"
               />
-
-              {/* <AntDesign
-              onPress={() => Alert.alert("Eliminado")}
-              style={styles.iconn}
-              name="delete-outline"
-              size={24}
-              color="#42b883"
-            /> */}
             </View>
           </React.Fragment>
         </ScrollView>
@@ -72,6 +64,7 @@ const Product = ({ navigation }) => {
   );
 };
 export default Product;
+
 const styles = StyleSheet.create({
   container: {
     width: 174,
