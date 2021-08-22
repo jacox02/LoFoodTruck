@@ -27,7 +27,7 @@ const Product = ({ navigation }) => {
       return (
         <ScrollView>
           <React.Fragment key={element.food_id}>
-            <View style={styles.container} key={element.food_id}>
+            <View style={styles.Foodcontainer} key={element.food_id}>
               <Image source={require("../images/5.png")} style={styles.img} />
               <AntDesign
                 style={styles.icon}
@@ -66,7 +66,7 @@ const Product = ({ navigation }) => {
 export default Product;
 
 const styles = StyleSheet.create({
-  container: {
+  Foodcontainer: {
     width: 174,
     height: 214,
     flexDirection: "row",
