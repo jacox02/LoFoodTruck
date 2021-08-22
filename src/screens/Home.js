@@ -67,7 +67,7 @@ export default function Home({ navigation }) {
       </View>
       <ScrollView>
         <View style={styles.container}>
-          <Text style={styles.title}>Explorar categorias</Text>
+          <Text style={styles.ttitle}>Explorar categorias</Text>
           <Text
             style={{
               fontSize: 12,
@@ -136,12 +136,12 @@ export default function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  title: {
+  ttitle: {
     color: "#4A69FF",
     fontSize: 16,
     marginLeft: 15,
     fontWeight: "bold",
-    marginTop: 25,
+    marginTop:5,
   },
   container: {
     flex: 1,
@@ -173,8 +173,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 15,
-    marginTop: 2,
-    marginBottom: 20,
+    marginTop: 30,
+    marginBottom: 10,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -206,14 +206,14 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 10,
     marginTop: 150,
-    marginLeft: -20,
+    marginLeft: -60,
     color: "#515F65",
   },
   price: {
     fontWeight: "bold",
     fontSize: 12,
     marginTop: 170,
-    marginLeft: -42,
+    marginLeft: -35,
     color: "#153E73",
   },
   icon: {

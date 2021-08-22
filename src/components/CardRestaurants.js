@@ -32,8 +32,8 @@ export default function CardRestaurants({ navigation }) {
                 source={{ uri: element.restaurant_image }}
                 style={styles.img}
               />
-              <Text style={styles.title}>{element.restaurant_name}</Text>
-              <Text style={styles.direction}>{element.restaurant_address}</Text>
+              <Text  style={styles.title}>{element.restaurant_name}</Text>
+              <Text  style={styles.direction}>{element.restaurant_address}</Text>
               <Text style={styles.category}>{element.category_name}</Text>
               <AntDesign
                 onPress={() => {
@@ -70,7 +70,7 @@ export default function CardRestaurants({ navigation }) {
                   style={styles.img}
                 />
                 <Text style={styles.title}>{element.restaurant_name}</Text>
-                <Text style={styles.direction}>
+                <Text numberOfLines={1} style={styles.direction}>
                   {element.restaurant_address}
                 </Text>
                 <Text style={styles.category}>{element.category_name}</Text>
