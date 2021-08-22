@@ -4,6 +4,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 
 const Restaurants = ({ navigation }) => {
+ 
   const [Restaurants, setRestaurants] = useState([]);
 
   const getRestaurants = async () => {
@@ -23,24 +24,21 @@ const Restaurants = ({ navigation }) => {
   }, []);
 
   return (
-    <View>
-      <ScrollView style={{ marginBottom: 10 }}>
-        <ScrollView
-          vertical
-          showsVerticalScrollindicator={true}
-          style={{ marginTop: 40 }}
-        >
+      <ScrollView
+      vertical
+      showsVerticalScrollindicator={true}
+      style={{ marginTop: 40,}}>
+       
           {Restaurants.map((element) => {
             return (
-              <ScrollView>
-                <React.Fragment>
                   <View style={styles.container} Key={element.restaurant_id}>
+                    
+                    <Text numberOfLines={1}  style={styles.title}>{element.restaurant_name}</Text>
                     <Image
                       source={{ uri: element.restaurant_image }}
                       style={styles.img}
                     />
-                    <Text style={styles.title}>{element.restaurant_name}</Text>
-                    <Text style={styles.direction}>
+                    <Text numberOfLines={1} style={styles.direction}>
                       {element.restaurant_address}
                     </Text>
                     <Text style={styles.category}>{element.category_name}</Text>
@@ -52,32 +50,30 @@ const Restaurants = ({ navigation }) => {
                       }}
                       style={styles.iconn}
                       name="rightcircleo"
-                      size={25}
+                      size={22}
                       color="#153E73"
                     />
                   </View>
-                </React.Fragment>
-              </ScrollView>
+                
+              
             );
           })}
-        </ScrollView>
       </ScrollView>
-    </View>
+    
   );
 };
 const styles = StyleSheet.create({
   container: {
-    width: 350,
-    height: 150,
-    flexDirection: "row",
-    textAlign: "center",
+    width: 320,
+    height: 180,
+    alignItems: "center",
     backgroundColor: "#fff",
     marginHorizontal: 15,
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 15,
     marginTop: 2,
-    marginLeft: 30,
+    marginLeft: 45,
     marginBottom: 20,
     shadowColor: "#000",
     shadowOffset: {
@@ -92,7 +88,6 @@ const styles = StyleSheet.create({
   img: {
     top: 2,
     bottom: 50,
-    left: 35,
     height: 80,
     width: 80,
     borderColor: "#ffffff",
@@ -101,28 +96,26 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 16,
     marginTop: 11,
-    marginLeft: 30,
     color: "#515F65",
   },
   direction: {
     fontWeight: "bold",
     fontSize: 10,
-    marginTop: 60,
-    marginLeft: -79,
+    top:-3,
     color: "#515F65",
   },
   category: {
     fontWeight: "bold",
     fontSize: 10,
-    marginTop: 40,
-    marginLeft: -209,
+    marginTop:1,
+    marginLeft:0,
     color: "#515F65",
   },
   iconn: {
-    marginTop: 100,
-    marginLeft: 99,
+    marginTop:-5,
+    marginLeft:250,
   },
 });
 export default Restaurants;
