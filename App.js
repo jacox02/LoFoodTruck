@@ -66,14 +66,24 @@ export default function App() {
           animation: "slide_from_right",
         }}
       >
-        <Stack.Screen name="STACK" component={MainTabNavigator}></Stack.Screen>
+        <Stack.Screen name="STACK" component={MainTabNavigator} options={{
+          headerShown: false
+        }}></Stack.Screen>
 
         <Stack.Screen
+        options={{
+          headerShown: false
+        }}
           name="RestaurantDetail"
           component={RestaurantDetail}
         ></Stack.Screen>
 
-        <Stack.Screen name="FoodDetail" component={FoodDetail}></Stack.Screen>
+        <Stack.Screen 
+          options={{
+            headerShown: false
+          }}
+          name="FoodDetail" 
+          component={FoodDetail} ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
