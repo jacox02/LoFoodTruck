@@ -4,31 +4,15 @@ import CardProduct from "../components/CardProduct";
 import { Table, Row, Rows } from "react-native-table-component";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default class Carrito extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      HeadTable: ["Item", "QTY", "Price"],
-      DataTable: [
-        ["Big Burguer", "X2", "$85.00 usd"],
-        ["Big Burguer", "X2", "$85.00 usd"],
-        ["Big Burguer", "X2", "$85.00 usd"],
-        ["Big Burguer", "X2", "$85.00 usd"],
-        ["Big Burguer", "X2", "$85.00 usd"],
-      ],
-    };
-  }
-
-  render() {
-    const state = this.state;
-    return (
-      <View>
+export default function Carrito() {
+  return (
+    <View>
         <ScrollView style={{ marginBottom: 10 }}>
           <CardProduct></CardProduct>
         </ScrollView>
 
-        <Table
+        {/* <Table
           style={{
             marginBottom: 20,
             width: 300,
@@ -44,7 +28,7 @@ export default class Carrito extends Component {
             textStyle={styles.TableText}
           />
           <Rows data={state.DataTable} textStyle={styles.TableText} />
-        </Table>
+        </Table> */}
 
         <LinearGradient
           start={{ x: 0, y: 0.5 }}
@@ -60,9 +44,10 @@ export default class Carrito extends Component {
           </Text>
         </LinearGradient>
       </View>
-    );
-  }
+  )
 }
+
+
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: "#fff" },
   button: {
