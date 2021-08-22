@@ -47,8 +47,7 @@ const Restaurants = ({ navigation }) => {
                     <AntDesign
                       onPress={() => {
                         navigation.navigate("RestaurantDetail", {
-                          itemId: 86,
-                          otherParam: "anything you want here",
+                          restaurantID: element.restaurant_id,
                         });
                       }}
                       style={styles.iconn}

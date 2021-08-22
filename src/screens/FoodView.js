@@ -26,14 +26,12 @@ const FoodView = ({ route, navigation }) => {
 
   const [foodInformation, setFoodInformation] = useState(defaultFood);
 
-
   const getRestaurants = async () => {
     try {
       const response = await fetch(
         `https://lofoodtruckapi.herokuapp.com/api/food/${foodID}`
       );
       const json = await response.json();
-console.log(json[0])
       setFoodInformation(json[0]);
     } catch (error) {
       console.error(error);
@@ -44,7 +42,6 @@ console.log(json[0])
     getRestaurants();
   }, []);
 
-
   return (
     <ScrollView
       style={{
@@ -54,7 +51,7 @@ console.log(json[0])
       showsVerticalScrollindicator={false}
     >
       <ImageBackground
-        source={{uri:foodInformation.food_image_uri}}
+        source={{ uri: foodInformation.food_image_uri }}
         style={{
           height: Dimensions.get("window").height / 2.2,
         }}
