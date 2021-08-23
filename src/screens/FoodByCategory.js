@@ -13,7 +13,6 @@ export default function FoodByCategory({ route, navigation }) {
         `https://lofoodtruckapi.herokuapp.com/api/food/${categoryID}/food/all`
       );
       const json = await response.json();
-      console.log(json);
       setCategoryFood(json);
     } catch (error) {
       console.error(error);
@@ -40,27 +39,25 @@ export default function FoodByCategory({ route, navigation }) {
                   <TouchableOpacity
                     style={styles.container}
                     Key={element.restaurant_id}
+                    onPress={() => {
+                      navigation.navigate("FoodDetail", {
+                        foodID: element.food_id,
+                      });
+                    }}
                   >
                     <Image
                       source={{ uri: element.food_image_uri }}
                       style={styles.img}
                     />
-                    <Text style={styles.title}>{element.food_name}</Text>
-                    <Text style={styles.food_description}>
-                      {element.restaurant_address}
-                    </Text>
-                    <Text style={styles.category}>{element.category_name}</Text>
-                    <AntDesign
-                      onPress={() => {
-                        navigation.navigate("RestaurantDetail", {
-                          restaurantID: element.restaurant_id,
-                        });
-                      }}
-                      style={styles.iconn}
-                      name="rightcircleo"
-                      size={25}
-                      color="#153E73"
-                    />
+                    <View>
+                      <Text style={styles.title}>{element.food_name}</Text>
+
+                      <Text>{`${element.food_description.slice(
+                        0,
+                        90
+                      )}...`}</Text>
+                      <Text>{element.food_price}</Text>
+                    </View>
                   </TouchableOpacity>
                 </ScrollView>
               );
@@ -106,7 +103,8 @@ const styles = StyleSheet.create({
   container: {
     width: 350,
     height: 150,
-    flexDirection: "row",
+    flexDirection: "column",
+    flexWrap: "wrap",
     textAlign: "center",
     backgroundColor: "#fff",
     marginHorizontal: 15,
@@ -123,19 +121,19 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.23,
     shadowRadius: 2.62,
-
     elevation: 4,
   },
   img: {
-    top: 2,
+    top: 25,
     bottom: 50,
-    left: 35,
+    left: 15,
     height: 80,
     width: 80,
     borderColor: "#ffffff",
     borderWidth: 3,
     borderRadius: 50,
   },
+
   title: {
     fontWeight: "bold",
     fontSize: 18,

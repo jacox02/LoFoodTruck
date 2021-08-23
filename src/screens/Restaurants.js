@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 
 const Restaurants = ({ navigation }) => {
- 
   const [Restaurants, setRestaurants] = useState([]);
 
   const getRestaurants = async () => {
@@ -24,42 +23,37 @@ const Restaurants = ({ navigation }) => {
   }, []);
 
   return (
-      <ScrollView
+    <ScrollView
       vertical
       showsVerticalScrollindicator={true}
-      style={{ marginTop: 40,}}>
-       
-          {Restaurants.map((element) => {
-            return (
-                  <View style={styles.container} Key={element.restaurant_id}>
-                    
-                    <Text numberOfLines={1}  style={styles.title}>{element.restaurant_name}</Text>
-                    <Image
-                      source={{ uri: element.restaurant_image }}
-                      style={styles.img}
-                    />
-                    <Text numberOfLines={1} style={styles.direction}>
-                      {element.restaurant_address}
-                    </Text>
-                    <Text style={styles.category}>{element.category_name}</Text>
-                    <AntDesign
-                      onPress={() => {
-                        navigation.navigate("RestaurantDetail", {
-                          restaurantID: element.restaurant_id,
-                        });
-                      }}
-                      style={styles.iconn}
-                      name="rightcircleo"
-                      size={22}
-                      color="#153E73"
-                    />
-                  </View>
-                
-              
-            );
-          })}
-      </ScrollView>
-    
+      style={{ marginTop: 40 }}
+    >
+      {Restaurants.map((element) => {
+        return (
+          <TouchableOpacity
+            style={styles.container}
+            Key={element.restaurant_id}
+            onPress={() => {
+              navigation.navigate("RestaurantDetail", {
+                restaurantID: element.restaurant_id,
+              });
+            }}
+          >
+            <Text numberOfLines={1} style={styles.title}>
+              {element.restaurant_name}
+            </Text>
+            <Image
+              source={{ uri: element.restaurant_image }}
+              style={styles.img}
+            />
+            <Text numberOfLines={1} style={styles.direction}>
+              {element.restaurant_address}
+            </Text>
+            <Text style={styles.category}>{element.category_name}</Text>
+          </TouchableOpacity>
+        );
+      })}
+    </ScrollView>
   );
 };
 const styles = StyleSheet.create({
@@ -103,19 +97,19 @@ const styles = StyleSheet.create({
   direction: {
     fontWeight: "bold",
     fontSize: 10,
-    top:-3,
+    top: -3,
     color: "#515F65",
   },
   category: {
     fontWeight: "bold",
     fontSize: 10,
-    marginTop:1,
-    marginLeft:0,
+    marginTop: 1,
+    marginLeft: 0,
     color: "#515F65",
   },
   iconn: {
-    marginTop:-5,
-    marginLeft:250,
+    marginTop: -5,
+    marginLeft: 250,
   },
 });
 export default Restaurants;

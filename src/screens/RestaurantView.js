@@ -7,6 +7,7 @@ import {
   Dimensions,
   StyleSheet,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
@@ -24,7 +25,6 @@ const RestaurantView = ({ route, navigation }) => {
       const json = await response.json();
 
       setRestaurantInfo(json[0][0]);
-      console.log(json[1]);
       setRestaurantFood(json[1]);
     } catch (error) {
       console.error(error);
@@ -106,7 +106,14 @@ const RestaurantView = ({ route, navigation }) => {
           </Text>
           <ScrollView style={{ left: 35, top: 40 }} horizontal={true}>
             {RestaurantFood.map((element) => (
-              <React.Fragment key={element.food_id}>
+              <TouchableOpacity
+                key={element.food_id}
+                onPress={() =>
+                  navigation.navigate("FoodDetail", {
+                    foodID: element.food_id,
+                  })
+                }
+              >
                 <View style={stylesCard.Foodcontainer} key={element.food_id}>
                   <Image
                     source={require("../images/5.png")}
@@ -121,20 +128,8 @@ const RestaurantView = ({ route, navigation }) => {
                   <Text style={stylesCard.title}>{element.food_name}</Text>
                   <Text style={stylesCard.subtitle}>{element.food_price}</Text>
                   <Text style={stylesCard.price}>${element.food_price}</Text>
-
-                  <AntDesign
-                    onPress={() =>
-                      navigation.navigate("FoodDetail", {
-                        foodID: element.food_id,
-                      })
-                    }
-                    style={stylesCard.iconn}
-                    name="rightcircleo"
-                    size={24}
-                    color="black"
-                  />
                 </View>
-              </React.Fragment>
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>

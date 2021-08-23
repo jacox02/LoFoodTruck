@@ -83,51 +83,47 @@ export default function Home({ navigation }) {
           </View>
         </View>
       </View>
-      <ScrollView>
-        <View style={styles.container}>
-          <Text style={styles.ttitle}>Explorar categorias</Text>
-          <Text
-            style={{
-              fontSize: 12,
-              color: "#CFCFCF",
-              position: "absolute",
-              top: 25,
-              left: 350,
+      <View
+        style={{
+          flex: 1,
+          flexDirection: "row",
+        }}
+      >
+        <Text
+          style={{
+            color: "#4A69FF",
+            fontSize: 16,
+            marginLeft: 15,
+            fontWeight: "bold",
+            marginTop: 5,
+          }}
+        >
+          Explorar categorias
+        </Text>
+      </View>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        style={{ marginTop: 25 }}
+      >
+        {Categories.map((category) => (
+          <TouchableOpacity
+            style={styles.categoriesContainer}
+            onPress={() => {
+              ToastAndroid.show("Cargando", 5000);
+              navigation.navigate("FoodByCategory", {
+                categoryID: category.category_id,
+                categoryName: category.category_name,
+              });
             }}
           >
-            VerTodos
-          </Text>
-        </View>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          style={{ marginTop: 25 }}
-        >
-          {Categories.map((category) => (
-            <TouchableOpacity
-              style={styles.categoriesContainer}
-              onPress={() => {
-                ToastAndroid.show(
-                  'Cargando',
-                  5000
-                );
-                navigation.navigate("FoodByCategory", {
-                  categoryID: category.category_id,
-                  categoryName: category.category_name,
-                });
-
-              }}
-            >
-              <Image
-                source={{ uri: category.category_image }}
-                style={styles.imgCategories}
-              />
-              <Text style={styles.titleCategories}>
-                {category.category_name}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+            <Image
+              source={{ uri: category.category_image }}
+              style={styles.imgCategories}
+            />
+            <Text style={styles.titleCategories}>{category.category_name}</Text>
+          </TouchableOpacity>
+        ))}
       </ScrollView>
       <Text
         style={{
@@ -135,7 +131,7 @@ export default function Home({ navigation }) {
           fontSize: 16,
           fontWeight: "bold",
           marginTop: 25,
-          marginLeft: 20,
+          marginLeft: 15,
         }}
       >
         Populares
@@ -182,13 +178,6 @@ export default function Home({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  ttitle: {
-    color: "#4A69FF",
-    fontSize: 16,
-    marginLeft: 15,
-    fontWeight: "bold",
-    marginTop: 5,
-  },
   imgCategories: { height: 30, width: 30, left: -1 },
   titleCategories: {
     fontWeight: "bold",
@@ -209,10 +198,6 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 15,
     opacity: 0.8,
-  },
-  container: {
-    flex: 1,
-    flexDirection: "column",
   },
   passwordContainer: {
     flexDirection: "row",
