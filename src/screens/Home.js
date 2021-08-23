@@ -45,7 +45,7 @@ export default function Home({ navigation }) {
 
   return (
     <ScrollView style={{ backgroundColor: "#fff" }}>
-      <View
+      {/* <View
         style={{
           flex: 1,
           alignItems: "center",
@@ -82,7 +82,7 @@ export default function Home({ navigation }) {
             />
           </View>
         </View>
-      </View>
+      </View> */}
       <View
         style={{
           flex: 1,
@@ -140,11 +140,14 @@ export default function Home({ navigation }) {
         {Food.map((element) => {
           return (
             <ScrollView>
-              <TouchableOpacity onPress={() =>
-                      navigation.navigate("FoodDetail", {
-                        foodID: element.food_id,
-                      })
-                    } key={element.food_id}>
+              <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("FoodDetail", {
+                    foodID: element.food_id,
+                  })
+                }
+                key={element.food_id}
+              >
                 <View style={styles.Foodcontainer} key={element.food_id}>
                   <Image
                     source={require("../images/5.png")}
@@ -232,7 +235,7 @@ const styles = StyleSheet.create({
   img: {
     top: 35,
     bottom: 50,
-    left:1,
+    left: 1,
     height: 80,
     width: 80,
     borderColor: "#ffffff",
@@ -257,12 +260,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 13,
     marginTop: 10,
-    marginLeft:2,
+    marginLeft: 2,
     color: "#153E73",
   },
   icon: {
-    marginTop:-75,
-    marginLeft:125,
+    marginTop: -75,
+    marginLeft: 125,
   },
-  
 });

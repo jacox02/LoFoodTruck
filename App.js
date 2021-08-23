@@ -1,7 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -60,6 +60,37 @@ function MainTabNavigator() {
 }
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const [userToken, setUserToken] = useState(null);
+
+  const authContext = React.useMemo(() => ({
+    signIn: () => {
+      setIsLoading(false);
+      setUserToken("dafasfsa");
+    },
+    signOut: () => {
+      setIsLoading(false);
+      setUserToken(null);
+    },
+    signUp: () => {
+      setIsLoading(false);
+      setUserToken("dafasfsa");
+    },
+  }));
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  });
+
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" color="#00ff00" />
+      </View>
+    );
+  }
   return (
     <NavigationContainer>
       <Stack.Navigator
