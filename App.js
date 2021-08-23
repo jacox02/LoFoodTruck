@@ -1,7 +1,8 @@
-import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -10,11 +11,16 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/screens/Home";
 import Carrito from "./src/screens/Carrito";
 import Restaurants from "./src/screens/Restaurants";
+import Profile from "./src/screens/ProfileScreen";
 
 import RestaurantDetail from "./src/screens/RestaurantView";
 import FoodByCategory from "./src/screens/FoodByCategory";
 import FoodDetail from "./src/screens/FoodView";
 
+import LoginScreen from "./src/screens/Login";
+import SignUpScreen from "./src/screens/SignUp";
+
+import { AuthContext } from "./src/components/context";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -55,81 +61,170 @@ function MainTabNavigator() {
           ),
         }}
       />
+      <Tab.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          tabBarLabel: "Profile",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="person-circle-outline" color={color} size={26} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
 
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [userToken, setUserToken] = useState(null);
+  const initialLoginState = {
+    isLoading: true,
+    userName: null,
+    userToken: null,
+  };
+  const loginReducer = (prevState, action) => {
+    switch (action.type) {
+      case "RETRIEVE_TOKEN":
+        return {
+          ...prevState,
+          userToken: action.token,
+          isLoading: false,
+        };
+      case "LOGIN":
+        return {
+          ...prevState,
+          userName: action.id,
+          userToken: action.token,
+          isLoading: false,
+        };
+      case "LOGOUT":
+        return {
+          ...prevState,
+          userName: null,
+          userToken: null,
+          isLoading: false,
+        };
+      case "REGISTER":
+        return {
+          ...prevState,
+          userName: action.id,
+          userToken: action.token,
+          isLoading: false,
+        };
+    }
+  };
 
-  const authContext = React.useMemo(() => ({
-    signIn: () => {
-      setIsLoading(false);
-      setUserToken("dafasfsa");
-    },
-    signOut: () => {
-      setIsLoading(false);
-      setUserToken(null);
-    },
-    signUp: () => {
-      setIsLoading(false);
-      setUserToken("dafasfsa");
-    },
-  }));
+  const [loginState, dispatch] = React.useReducer(
+    loginReducer,
+    initialLoginState
+  );
+
+  const authContext = React.useMemo(
+    () => ({
+      signIn: async (userName, password) => {
+        // setUserToken('fgkj');
+        // setIsLoading(false);
+        let userToken;
+        userToken = null;
+        if (userName == "user" && password == "pass") {
+          try {
+            userToken = "dfgdfg";
+            await AsyncStorage.setItem("userToken", userToken);
+          } catch (e) {
+            console.log(e);
+          }
+        }
+        // console.log('user token: ', userToken);
+        dispatch({ type: "LOGIN", id: userName, token: userToken });
+      },
+      signOut: async () => {
+        // setUserToken(null);
+        // setIsLoading(false);
+        try {
+          await AsyncStorage.removeItem("userToken");
+        } catch (e) {
+          console.log(e);
+        }
+        dispatch({ type: "LOGOUT" });
+      },
+      signUp: () => {
+        // setUserToken('fgkj');
+        // setIsLoading(false);
+      },
+    }),
+    []
+  );
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-  });
+    setTimeout(async () => {
+      // setIsLoading(false);
+      let userToken;
+      userToken = null;
+      try {
+        userToken = await AsyncStorage.getItem("userToken");
+      } catch (e) {
+        console.log(e);
+      }
+      // console.log('user token: ', userToken);
+      dispatch({ type: "RETRIEVE_TOKEN", token: userToken });
+    }, 1000);
+  }, []);
 
-  if (isLoading) {
+  if (loginState.isLoading) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#00ff00" />
+        <ActivityIndicator size="large" />
       </View>
     );
   }
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{
-          animation: "slide_from_right",
-        }}
-      >
-        <Stack.Screen
-          name="STACK"
-          component={MainTabNavigator}
-          options={{
-            headerShown: false,
-          }}
-        ></Stack.Screen>
+    <AuthContext.Provider value={authContext}>
+      <NavigationContainer>
+        {loginState.userToken !== null ? (
+          <Stack.Navigator
+            screenOptions={{
+              animation: "slide_from_right",
+            }}
+          >
+            <Stack.Screen
+              name="STACK"
+              component={MainTabNavigator}
+              options={{
+                headerShown: false,
+              }}
+            ></Stack.Screen>
 
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="RestaurantDetail"
-          component={RestaurantDetail}
-        ></Stack.Screen>
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="FoodByCategory"
-          component={FoodByCategory}
-        ></Stack.Screen>
+            <Stack.Screen
+              options={{
+                headerShown: false,
+              }}
+              name="RestaurantDetail"
+              component={RestaurantDetail}
+            ></Stack.Screen>
+            <Stack.Screen
+              options={{
+                headerShown: false,
+              }}
+              name="FoodByCategory"
+              component={FoodByCategory}
+            ></Stack.Screen>
 
-        <Stack.Screen
-          options={{
-            headerShown: false,
-          }}
-          name="FoodDetail"
-          component={FoodDetail}
-        ></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+            <Stack.Screen
+              options={{
+                headerShown: false,
+              }}
+              name="FoodDetail"
+              component={FoodDetail}
+            ></Stack.Screen>
+          </Stack.Navigator>
+        ) : (
+          <Stack.Navigator>
+            <Stack.Screen name="Login" component={LoginScreen}></Stack.Screen>
+            <Stack.Screen name="SignUp" component={SignUpScreen}></Stack.Screen>
+          </Stack.Navigator>
+        )}
+      </NavigationContainer>
+    </AuthContext.Provider>
   );
 }
 

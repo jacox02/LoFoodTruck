@@ -1,9 +1,24 @@
 import React, { useState } from "react";
-import { Text, View, TextInput, StyleSheet, ToastAndroid } from "react-native";
+import {
+  Text,
+  View,
+  TextInput,
+  StyleSheet,
+  ToastAndroid,
+  TouchableOpacity,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { AuthContext } from "../components/context";
 
-const LoginScreen = () => {
-  const [text, onChangeText] = React.useState("User Name");
+const LoginScreen = ({ navigation }) => {
+  const [UserName, setUserName] = useState("");
+  const [Password, setPassword] = useState("");
+
+  const { signIn } = React.useContext(AuthContext);
+
+  const loginHandle = (username, password) => {
+    signIn(username, password);
+  };
   return (
     <View style={styles.container}>
       <View>
@@ -16,14 +31,15 @@ const LoginScreen = () => {
       <View>
         <View>
           <TextInput
-            placeholder={"Usermane"}
-            onChangeText={onChangeText}
+            placeholder={"Username"}
+            onChangeText={setUserName}
             style={styles.inputt}
           ></TextInput>
 
           <TextInput
             placeholder={"Password"}
             secureTextEntry={true}
+            onChangeText={setPassword}
             style={styles.input}
           ></TextInput>
         </View>
@@ -38,18 +54,23 @@ const LoginScreen = () => {
         Forgot Password
       </Text>
 
-      <LinearGradient
-        start={{ x: 0, y: 0.5 }}
-        end={{ x: 1, y: 1 }}
-        colors={["#4A1192", "#20D0C4"]}
-        style={styles.button}
+      <TouchableOpacity
+        onPress={() => {
+          loginHandle(UserName, Password);
+        }}
       >
-        <Text style={styles.text}>
-          {/* Sign in <AntDesign name="arrowright" size={15} color="white" /> */}
-          Sign in
-        </Text>
-      </LinearGradient>
-
+        <LinearGradient
+          start={{ x: 0, y: 0.5 }}
+          end={{ x: 1, y: 1 }}
+          colors={["#4A1192", "#20D0C4"]}
+          style={styles.button}
+        >
+          <Text style={styles.text}>
+            {/* Sign in <AntDesign name="arrowright" size={15} color="white" /> */}
+            Sign in
+          </Text>
+        </LinearGradient>
+      </TouchableOpacity>
       <View
         style={{
           marginTop: 200,
