@@ -144,7 +144,11 @@ export default function Home({ navigation }) {
         {Food.map((element) => {
           return (
             <ScrollView>
-              <React.Fragment key={element.food_id}>
+              <TouchableOpacity onPress={() =>
+                      navigation.navigate("FoodDetail", {
+                        foodID: element.food_id,
+                      })
+                    } key={element.food_id}>
                 <View style={styles.Foodcontainer} key={element.food_id}>
                   <Image
                     source={require("../images/5.png")}
@@ -159,20 +163,8 @@ export default function Home({ navigation }) {
                   <Text style={styles.title}>{element.food_name}</Text>
                   <Text style={styles.subtitle}>{element.food_price}</Text>
                   <Text style={styles.price}>${element.food_price}</Text>
-
-                  <AntDesign
-                    onPress={() =>
-                      navigation.navigate("FoodDetail", {
-                        foodID: element.food_id,
-                      })
-                    }
-                    style={styles.iconn}
-                    name="rightcircleo"
-                    size={24}
-                    color="black"
-                  />
                 </View>
-              </React.Fragment>
+              </TouchableOpacity>
             </ScrollView>
           );
         })}
@@ -225,22 +217,22 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     margin: 10,
   },
-  Icon: {
-    padding: 10,
-    margin: 5,
-    alignItems: "center",
-  },
+  // Icon: {
+  //   padding: 10,
+  //   margin: 5,
+  //   alignItems: "center",
+  // },
 
   Foodcontainer: {
     width: 174,
     height: 214,
-    flexDirection: "row",
     backgroundColor: "#FBFBFB",
+    alignItems: "center",
     marginHorizontal: 15,
     borderRadius: 10,
     paddingVertical: 5,
     paddingHorizontal: 15,
-    marginTop: 30,
+    marginTop: 40,
     marginBottom: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -253,9 +245,9 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   img: {
-    top: 50,
+    top: 35,
     bottom: 50,
-    left: 35,
+    left:1,
     height: 80,
     width: 80,
     borderColor: "#ffffff",
@@ -264,31 +256,28 @@ const styles = StyleSheet.create({
   },
   title: {
     fontWeight: "bold",
-    fontSize: 12,
-    marginTop: 130,
-    marginLeft: -147,
+    fontSize: 14,
+    marginTop: 100,
+    marginLeft: 4,
     color: "#515F65",
   },
   subtitle: {
     fontWeight: "bold",
     fontSize: 10,
-    marginTop: 150,
-    marginLeft: -60,
+    marginTop: 10,
+    marginLeft: 6,
     color: "#515F65",
   },
   price: {
     fontWeight: "bold",
-    fontSize: 12,
-    marginTop: 170,
-    marginLeft: -35,
+    fontSize: 13,
+    marginTop: 10,
+    marginLeft:2,
     color: "#153E73",
   },
   icon: {
-    marginTop: 1,
-    marginLeft: 50,
+    marginTop:-75,
+    marginLeft:125,
   },
-  iconn: {
-    marginTop: 160,
-    marginLeft: 80,
-  },
+  
 });
