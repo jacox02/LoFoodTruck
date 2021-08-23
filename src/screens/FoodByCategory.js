@@ -45,18 +45,20 @@ export default function FoodByCategory({ route, navigation }) {
                       });
                     }}
                   >
-                    <Image
+                    
+                    <View>
+                  
+                      <Text style={styles.title}>{element.food_name}</Text>
+                      <Image
                       source={{ uri: element.food_image_uri }}
                       style={styles.img}
                     />
-                    <View>
-                      <Text style={styles.title}>{element.food_name}</Text>
 
-                      <Text>{`${element.food_description.slice(
+                      <Text style={styles.direction} numberOfLines={1}> {`${element.food_description.slice(
                         0,
                         90
                       )}...`}</Text>
-                      <Text>{element.food_price}</Text>
+                      <Text style={styles.category}>${element.food_price}</Text>
                     </View>
                   </TouchableOpacity>
                 </ScrollView>
@@ -102,7 +104,7 @@ const styles = StyleSheet.create({
   },
   container: {
     width: 350,
-    height: 150,
+    height: 210,
     flexDirection: "column",
     flexWrap: "wrap",
     textAlign: "center",
@@ -124,11 +126,10 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   img: {
-    top: 25,
-    bottom: 50,
+    top:5,
     left: 15,
-    height: 80,
-    width: 80,
+    height: 90,
+    width: 90,
     borderColor: "#ffffff",
     borderWidth: 3,
     borderRadius: 50,
@@ -137,22 +138,22 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     fontSize: 18,
-    marginTop: 11,
-    marginLeft: 30,
+    marginTop:15,
+    marginLeft: 10,
     color: "#515F65",
   },
   direction: {
     fontWeight: "bold",
-    fontSize: 10,
-    marginTop: 60,
-    marginLeft: -79,
+    fontSize: 14,
+    marginTop: 15,
+    left:10,
     color: "#515F65",
   },
   category: {
     fontWeight: "bold",
-    fontSize: 10,
-    marginTop: 40,
-    marginLeft: -209,
+    fontSize: 18,
+    marginTop: 4,
+   marginLeft:10,
     color: "#515F65",
   },
   iconn: {

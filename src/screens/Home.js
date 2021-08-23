@@ -117,10 +117,10 @@ export default function Home({ navigation }) {
               });
             }}
           >
-            <Image
+            {/* <Image
               source={{ uri: category.category_image }}
               style={styles.imgCategories}
-            />
+            /> */}
             <Text style={styles.titleCategories}>{category.category_name}</Text>
           </TouchableOpacity>
         ))}
@@ -176,14 +176,15 @@ const styles = StyleSheet.create({
   imgCategories: { height: 30, width: 30, left: -1 },
   titleCategories: {
     fontWeight: "bold",
-    fontSize: 12,
+    fontSize: 14,
     paddingLeft: 0,
+    top:5,
     color: "#fff",
     textAlign: "center",
   },
   categoriesContainer: {
     flex: 1,
-    width: 90,
+    width: 100,
     height: 60,
     alignItems: "center",
     flexDirection: "column",
