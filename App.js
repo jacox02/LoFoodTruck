@@ -148,24 +148,18 @@ export default function App() {
         if (json.length > 0) {
           let userToken;
           userToken = null;
-
           try {
-            userToken = json.user_id;
+            userToken = json[0].user_id.toString();
             await AsyncStorage.setItem("userToken", userToken);
           } catch (e) {
             console.log(e);
           }
-
-          // setUserToken("fgkj");
-          // console.log('user token: ', userToken);
           dispatch({ type: "LOGIN", id: userName, token: userToken });
         } else {
           ToastAndroid.show("User or password invalid", 3000);
         }
       },
       signOut: async () => {
-        // setUserToken(null);
-        // setIsLoading(false);
         try {
           await AsyncStorage.removeItem("userToken");
         } catch (e) {
@@ -173,7 +167,7 @@ export default function App() {
         }
         dispatch({ type: "LOGOUT" });
       },
-      signUp: () => {
+      signUp: async () => {
         // setUserToken('fgkj');
         // setIsLoading(false);
       },
@@ -183,7 +177,6 @@ export default function App() {
 
   useEffect(() => {
     setTimeout(async () => {
-      // setIsLoading(false);
       let userToken;
       userToken = null;
       try {
@@ -191,7 +184,6 @@ export default function App() {
       } catch (e) {
         console.log(e);
       }
-      // console.log('user token: ', userToken);
       dispatch({ type: "RETRIEVE_TOKEN", token: userToken });
     }, 1000);
   }, []);

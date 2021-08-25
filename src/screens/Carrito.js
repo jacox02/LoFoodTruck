@@ -1,17 +1,43 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, ScrollView, StyleSheet, Alert } from "react-native";
 import CardProduct from "../components/CardProduct";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import { Table, Row, Rows } from "react-native-table-component";
 import { LinearGradient } from "expo-linear-gradient";
 
 export default function Carrito() {
+  const [FoodRows, setFoodRows] = useState(["Item", "Quantity", "Price"]);
+
+  const [userId, setUserId] = useState(0);
+
+  async function getUserInfo() {
+    let getUserId = await AsyncStorage.getItem("userToken");
+    setUserId(getUserId);
+    console.log(getUserId.toString());
+  }
+  const [FoodColumns, setFoodColumns] = useState([
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+    ["A", "B", "C"],
+  ]);
+  useEffect(() => {}, []);
   return (
     <View>
       <ScrollView style={{ marginBottom: 10 }}>
         <CardProduct></CardProduct>
       </ScrollView>
 
-      {/* <Table
+      <Table
         style={{
           marginBottom: 20,
           width: 300,
@@ -22,12 +48,12 @@ export default function Carrito() {
         }}
       >
         <Row
-          data={state.HeadTable}
+          data={FoodRows}
           style={styles.HeadStyle}
           textStyle={styles.TableText}
         />
-        <Rows data={state.DataTable} textStyle={styles.TableText} />
-      </Table> */}
+        <Rows data={FoodColumns} textStyle={styles.TableText} />
+      </Table>
 
       <LinearGradient
         start={{ x: 0, y: 0.5 }}
