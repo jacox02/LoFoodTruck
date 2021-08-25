@@ -121,19 +121,25 @@ export default function App() {
   const authContext = React.useMemo(
     () => ({
       signIn: async (userName, password) => {
-        // setUserToken('fgkj');
+        let validatedUserName = "";
+        let validatedUserId = "";
+        let isValidated = false;
         // setIsLoading(false);
-        fetch("https://lofoodtruckapi.herokuapp.com/api/users/login/", {
-          method: "GET",
-          body: JSON.stringify({
-            userEmail: userName,
-            passWord: password,
-          }),
-        });
-
+        const response = await fetch(
+          "https://lofoodtruckapi.herokuapp.com/api/users/login/",
+          {
+            method: "POST",
+            body: JSON.stringify({
+              userEmail: userName,
+              passWord: password,
+            }),
+          }
+        );
+        const json = await response.json();
+        console.log(json);
         let userToken;
         userToken = null;
-        if (userName == "user" && password == "pass") {
+        if (isValidated) {
           try {
             userToken = "dfgdfg";
             await AsyncStorage.setItem("userToken", userToken);
@@ -141,6 +147,7 @@ export default function App() {
             console.log(e);
           }
         }
+        // setUserToken("fgkj");
         // console.log('user token: ', userToken);
         dispatch({ type: "LOGIN", id: userName, token: userToken });
       },
