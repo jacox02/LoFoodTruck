@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Ionicons } from "@expo/vector-icons";
-import { StyleSheet, View, ActivityIndicator } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ActivityIndicator,
+  ToastAndroid,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -124,32 +129,39 @@ export default function App() {
         let validatedUserName = "";
         let validatedUserId = "";
         let isValidated = false;
-        // setIsLoading(false);
         const response = await fetch(
           "https://lofoodtruckapi.herokuapp.com/api/users/login/",
           {
             method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
             body: JSON.stringify({
               userEmail: userName,
-              passWord: password,
+              password: password,
             }),
           }
         );
         const json = await response.json();
-        console.log(json);
-        let userToken;
-        userToken = null;
-        if (isValidated) {
+
+        if (json.length > 0) {
+          let userToken;
+          userToken = null;
+
           try {
-            userToken = "dfgdfg";
+            userToken = json.user_id;
             await AsyncStorage.setItem("userToken", userToken);
           } catch (e) {
             console.log(e);
           }
+
+          // setUserToken("fgkj");
+          // console.log('user token: ', userToken);
+          dispatch({ type: "LOGIN", id: userName, token: userToken });
+        } else {
+          ToastAndroid.show("User or password invalid", 3000);
         }
-        // setUserToken("fgkj");
-        // console.log('user token: ', userToken);
-        dispatch({ type: "LOGIN", id: userName, token: userToken });
       },
       signOut: async () => {
         // setUserToken(null);
