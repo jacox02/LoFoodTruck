@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Ionicons } from "@expo/vector-icons";
 import { StyleSheet, View, ActivityIndicator } from "react-native";
-import AsyncStorage from "@react-native-community/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -123,6 +123,14 @@ export default function App() {
       signIn: async (userName, password) => {
         // setUserToken('fgkj');
         // setIsLoading(false);
+        fetch("https://lofoodtruckapi.herokuapp.com/api/users/login/", {
+          method: "GET",
+          body: JSON.stringify({
+            userEmail: userName,
+            passWord: password,
+          }),
+        });
+
         let userToken;
         userToken = null;
         if (userName == "user" && password == "pass") {
