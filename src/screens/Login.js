@@ -74,7 +74,7 @@ const LoginScreen = ({ navigation }) => {
       </TouchableOpacity>
       <View
         style={{
-          marginTop: 200,
+          marginTop:200,
         }}
       >
         <Text
@@ -87,6 +87,7 @@ const LoginScreen = ({ navigation }) => {
             style={{ color: "#4A1192" }}
             onPress={() => {
               ToastAndroid.show("Registrate mmg!", ToastAndroid.SHORT);
+              navigation.navigate("SignUp")
             }}
           >
             {" "}
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
     fontSize: 42,
     fontFamily: "",
     textAlign: "center",
-    marginTop: 200,
+    marginTop:130,
     fontWeight: "bold",
   },
   tituloo: {
@@ -152,6 +153,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "#4A69FF",
     elevation: 1,
+    paddingLeft:20,
   },
   input: {
     height: 40,
@@ -161,6 +163,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "#20D0C4",
     elevation: 1,
+    paddingLeft:20,
   },
   button: {
     alignItems: "center",

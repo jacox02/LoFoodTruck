@@ -28,7 +28,6 @@ const SignUpScreen = () => {
 
           <TextInput
             placeholder={"Correo"}
-            secureTextEntry={true}
             onChangeText={onChangeEmailText}
             style={styles.inputTexts}
           ></TextInput>
@@ -72,14 +71,13 @@ const styles = StyleSheet.create({
   headerText: {
     color: "#4A69FF",
     fontSize: 42,
-    fontFamily: "",
     textAlign: "center",
-    marginTop: 200,
+    marginTop: 70,
     fontWeight: "bold",
   },
   headerSecondaryText: {
-    color: "#4A1192",
-    fontSize: 15,
+    color:"#4A69FF",
+    fontSize: 12,
     fontFamily: "",
     textAlign: "center",
     marginTop: 10,
@@ -94,7 +92,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: "#20D0C4",
+    borderColor: "#4A69FF",
     elevation: 1,
   },
   button: {
