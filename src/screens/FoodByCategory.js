@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingTop: 50,
     paddingBottom: 20,
-    color: "#515F65",
+    color: "#0100A6",
   },
   noResultText: {
     fontWeight: "bold",
@@ -138,21 +138,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 15,
     marginLeft: 10,
-    color: "#515F65",
+    color: "#0100A6",
   },
   direction: {
     fontWeight: "bold",
     fontSize: 14,
     marginTop: 15,
     left: 10,
-    color: "#515F65",
+    color: "#0100A6"
   },
   category: {
     fontWeight: "bold",
     fontSize: 18,
     marginTop: 4,
     marginLeft: 10,
-    color: "#515F65",
+    color: "#0100A6",
   },
   iconn: {
     marginTop: 100,

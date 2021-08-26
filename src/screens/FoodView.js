@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Ingredients from "../components/Ingredients";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const FoodView = ({ route, navigation }) => {
   const { foodID } = route.params;
@@ -58,6 +59,15 @@ const FoodView = ({ route, navigation }) => {
       >
         <View>
           <Text style={styles.title}>{foodInformation.food_name}</Text>
+          <View>
+          <MaterialIcons
+            style={styles.icon}
+            name="keyboard-arrow-left"
+            size={35}
+            color="white"
+            onPress={() =>navigation.goBack()}
+          />
+        </View>
         </View>
       </ImageBackground>
 
@@ -69,24 +79,6 @@ const FoodView = ({ route, navigation }) => {
           <Text style={{ color: "#153E73", fontSize: 12, top: 10 }}>
             {foodInformation.food_description}
           </Text>
-        </View>
-        <View>
-          <Text
-            style={{
-              color: "#153E73",
-              fontSize: 18,
-              fontWeight: "bold",
-              paddingLeft: 40,
-            }}
-          >
-            Ingredientes
-          </Text>
-          <Text style={{ color: "#9A9A9A", fontSize: 10, left: 315, top: -25 }}>
-            10 ingredientes
-          </Text>
-          <ScrollView>
-            <Ingredients></Ingredients>
-          </ScrollView>
         </View>
       </View>
       <View>
@@ -104,7 +96,7 @@ const FoodView = ({ route, navigation }) => {
             color: "#153E73",
             fontWeight: "bold",
             left: 310,
-            top: -45,
+            top: -48,
           }}
         >
           ${foodInformation.food_price}
@@ -119,7 +111,7 @@ export default FoodView;
 const styles = StyleSheet.create({
   bottomView: {
     flex: 1.5,
-    backgroundColor: "#ffffff",
+    backgroundColor:"#fff",
     bottom: 50,
     borderTopStartRadius: 60,
     width: "100%",
@@ -128,11 +120,11 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     fontSize: 16,
     fontWeight: "bold",
-    left: 115,
-    top: 30,
+    left: 150,
+    top:60,
   },
   icon: {
-    top: 55,
+    top:35,
     left: 29,
   },
   button: {
@@ -142,7 +134,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 15,
     marginLeft: 40,
-    marginTop: -15,
+    marginTop:3,
   },
   text: {
     fontSize: 18,
