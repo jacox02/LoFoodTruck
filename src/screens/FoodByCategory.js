@@ -4,7 +4,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import { AntDesign } from "@expo/vector-icons";
 export default function FoodByCategory({ route, navigation }) {
   const { categoryID, categoryName } = route.params;
-
   const [CategoryFood, setCategoryFood] = useState([]);
 
   const getRestaurants = async () => {
@@ -53,7 +52,6 @@ export default function FoodByCategory({ route, navigation }) {
                       />
 
                       <Text style={styles.direction} numberOfLines={1}>
-                        {" "}
                         {`${element.food_description.slice(0, 90)}...`}
                       </Text>
                       <Text style={styles.category}>${element.food_price}</Text>

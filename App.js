@@ -144,7 +144,7 @@ export default function App() {
           }
         );
         const json = await response.json();
-
+        console.log(json);
         if (json.length > 0) {
           let userToken;
           userToken = null;
@@ -167,9 +167,47 @@ export default function App() {
         }
         dispatch({ type: "LOGOUT" });
       },
-      signUp: async () => {
-        // setUserToken('fgkj');
-        // setIsLoading(false);
+      signUp: async (userFullName, userEmail, userPassword) => {
+        const response = await fetch(
+          "https://lofoodtruckapi.herokuapp.com/api/users/signup/",
+          {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userEmail: userEmail,
+              userFullName: userFullName,
+              userPassword: userPassword,
+            }),
+          }
+        );
+        const json = await response.json();
+        if (json.status == "done") {
+          console.log(json);
+          ToastAndroid.show(
+            "Usuario registrado, inicie sesion con su email y clave!",
+            5000
+          );
+          // try {
+          //   await AsyncStorage.removeItem("userToken");
+          // } catch (e) {
+          //   console.log(e);
+          // }
+        } else {
+          console.log("Error");
+          if (json.data.code == "ER_DUP_ENTRY") {
+            ToastAndroid.show("Error, este email ya esta en uso", 3000);
+          } else {
+            ToastAndroid.show(
+              `Error: ${json.error} contacte a soporte tecnico`,
+              3000
+            );
+          }
+
+          console.log(json);
+        }
       },
     }),
     []

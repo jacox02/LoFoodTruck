@@ -6,37 +6,31 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Table, Row, Rows } from "react-native-table-component";
 import { LinearGradient } from "expo-linear-gradient";
 
-export default function Carrito() {
+export default function Carrito({ navigation }) {
   const [FoodRows, setFoodRows] = useState(["Item", "Quantity", "Price"]);
-
-  const [userId, setUserId] = useState(0);
+  const [UserInfo, setUserInfo] = useState({});
+  const [FoodForTable, setFoodForTable] = useState([[]]);
+  const [FoodForShow, setFoodForShow] = useState([]);
 
   async function getUserInfo() {
     let getUserId = await AsyncStorage.getItem("userToken");
-    setUserId(getUserId);
-    console.log(getUserId.toString());
+    setUserInfo({ info: JSON.parse(getUserId) });
   }
-  const [FoodColumns, setFoodColumns] = useState([
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-    ["A", "B", "C"],
-  ]);
-  useEffect(() => {}, []);
+  async function getShoppingCart() {
+    await fetch(
+      `https://lofoodtruckapi.herokuapp.com/api/food/${categoryID}/food/all`
+    );
+  }
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   return (
     <View>
       <ScrollView style={{ marginBottom: 10 }}>
         <CardProduct></CardProduct>
       </ScrollView>
-
+      <Text>User: {UserInfo["info"]}</Text>
       <Table
         style={{
           marginBottom: 20,
@@ -52,9 +46,8 @@ export default function Carrito() {
           style={styles.HeadStyle}
           textStyle={styles.TableText}
         />
-        <Rows data={FoodColumns} textStyle={styles.TableText} />
+        <Rows data={FoodForTable} textStyle={styles.TableText} />
       </Table>
-
       <LinearGradient
         start={{ x: 0, y: 0.5 }}
         end={{ x: 1, y: 1 }}

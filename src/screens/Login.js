@@ -9,7 +9,11 @@ import {
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { AuthContext } from "../components/context";
-
+import {
+  MaterialCommunityIcons,
+  FontAwesome,
+  Entypo,
+} from "@expo/vector-icons";
 const LoginScreen = ({ navigation }) => {
   const [UserName, setUserName] = useState("");
   const [Password, setPassword] = useState("");
@@ -23,9 +27,9 @@ const LoginScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.textt}>Hello!</Text>
+        <Text style={styles.textt}>Bienvenido!</Text>
         <Text style={{ color: "#4A1192" }}>
-          Loren ipsum dolor dit amet conseteur
+          Aqui estan lo' mejore' foodtruck del pais!
         </Text>
       </View>
 
@@ -46,14 +50,14 @@ const LoginScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <Text
+      {/* <Text
         style={{
           marginLeft: 180,
           color: "#757575",
         }}
       >
         Forgot Password
-      </Text>
+      </Text> */}
 
       <TouchableOpacity
         onPress={() => {
@@ -68,13 +72,13 @@ const LoginScreen = ({ navigation }) => {
         >
           <Text style={styles.text}>
             {/* Sign in <AntDesign name="arrowright" size={15} color="white" /> */}
-            Sign in
+            Entrar
           </Text>
         </LinearGradient>
       </TouchableOpacity>
       <View
         style={{
-          marginTop:200,
+          marginTop: 200,
         }}
       >
         <Text
@@ -82,46 +86,44 @@ const LoginScreen = ({ navigation }) => {
             marginRight: 20,
           }}
         >
-          Don't have an account?
+          No tienes una cuenta? No le pare',
           <Text
             style={{ color: "#4A1192" }}
             onPress={() => {
-              ToastAndroid.show("Registrate mmg!", ToastAndroid.SHORT);
-              navigation.navigate("SignUp")
+              navigation.navigate("SignUp");
             }}
           >
-            {" "}
-            SIGN UP
+            registrate
           </Text>
         </Text>
       </View>
 
-      {/* <View>
+      <View>
         <MaterialCommunityIcons
-          style={{ marginTop: -90, marginLeft: 300 }}
+          style={{ marginTop: -90, marginLeft: 300, opacity: 20 }}
           name="food"
           size={30}
           color="#20D0C4"
         />
         <MaterialCommunityIcons
-          style={{ marginTop: -550 }}
+          style={{ marginTop: -550, opacity: 20 }}
           name="food-variant"
           size={30}
           color="#20D0C4"
         />
-        <FontAwesome5
-          style={{ marginTop: 350, marginLeft: 20 }}
+        {/* <FontAwesome
+          style={{ marginTop: 350, marginLeft: 20, opacity: 20 }}
           name="money-bill-wave"
           size={24}
           color="#4A1192"
-        />
+        /> */}
         <Entypo
-          style={{ marginTop: -350, marginLeft: 300 }}
+          style={{ marginTop: -350, marginLeft: 300, opacity: 10 }}
           name="location-pin"
           size={30}
           color="#4A1192"
         />
-      </View> */}
+      </View>
     </View>
   );
 };
@@ -137,7 +139,7 @@ const styles = StyleSheet.create({
     fontSize: 42,
     fontFamily: "",
     textAlign: "center",
-    marginTop:130,
+    marginTop: 130,
     fontWeight: "bold",
   },
   tituloo: {
@@ -153,7 +155,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "#4A69FF",
     elevation: 1,
-    paddingLeft:20,
+    paddingLeft: 20,
   },
   input: {
     height: 40,
@@ -163,7 +165,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderColor: "#20D0C4",
     elevation: 1,
-    paddingLeft:20,
+    paddingLeft: 20,
   },
   button: {
     alignItems: "center",

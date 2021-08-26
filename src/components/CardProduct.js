@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Image, Text, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  StyleSheet,
+  Alert,
+  ToastAndroid,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Contador from "../components/Contador";
@@ -51,14 +58,14 @@ export default class CardProduct extends React.Component {
         },
       ],
     };
-    card = () => {
+    this.card = () => {
       return this.state.products.map((element) => {
         return (
           <ScrollView>
             <View key={element.Key} style={styles.container}>
               <Image source={{ uri: element.image }} style={styles.img} />
               <MaterialCommunityIcons
-                onPress={() => Alert.alert("Eliminado")}
+                onPress={() => ToastAndroid.show("Eliminado", 3000)}
                 style={styles.icon}
                 name="delete-circle"
                 size={35}
@@ -82,7 +89,7 @@ export default class CardProduct extends React.Component {
         showsHorizontalScrollIndicator={false}
         style={{ marginTop: 30 }}
       >
-        {card()}
+        {this.card()}
       </ScrollView>
     );
   }

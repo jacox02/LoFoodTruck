@@ -12,7 +12,6 @@ export default function ProfileScreen({ navigation }) {
   async function getUserInfo() {
     let getUserId = await AsyncStorage.getItem("userToken");
     setUserId(getUserId);
-    console.log(getUserId.toString());
   }
   useEffect(() => {
     getUserInfo();

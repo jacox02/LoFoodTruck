@@ -1,12 +1,21 @@
 import React from "react";
 import { Text, StyleSheet, View, TextInput, Button } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { ToastAndroid } from "react-native";
+import { ToastAndroid, TouchableOpacity } from "react-native";
+import { AuthContext } from "../components/context";
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigation }) => {
   const [userFullname, onChangeFullNameText] = React.useState("userFullName");
   const [userPassword, onChangePasswordText] = React.useState("userPassword");
   const [userEmail, onChangeEmailText] = React.useState("userEmail");
+
+  const { signUp } = React.useContext(AuthContext);
+
+  const signUpHandle = async (username, useremail, password) => {
+    await signUp(username, useremail, password).then(() => {
+      setTimeout(navigation.navigate("Login"), 3000);
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -38,16 +47,20 @@ const SignUpScreen = () => {
             onChangeText={onChangePasswordText}
             style={styles.inputTexts}
           ></TextInput>
-
-          <LinearGradient
-            start={{ x: 0, y: 0.5 }}
-            end={{ x: 1, y: 1 }}
-            colors={["#4A1192", "#20D0C4"]}
-            style={styles.button}
-            onPressAction={() => console.log("Bobo B")}
+          <TouchableOpacity
+            onPress={() => {
+              signUpHandle(userFullname, userEmail, userPassword);
+            }}
           >
-            <Text style={styles.signUpButton}>Sign in</Text>
-          </LinearGradient>
+            <LinearGradient
+              start={{ x: 0, y: 0.5 }}
+              end={{ x: 1, y: 1 }}
+              colors={["#4A1192", "#20D0C4"]}
+              style={styles.button}
+            >
+              <Text style={styles.signUpButton}>Regitrarme</Text>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
       </View>
     </View>
@@ -76,7 +89,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   headerSecondaryText: {
-    color:"#4A69FF",
+    color: "#4A69FF",
     fontSize: 12,
     fontFamily: "",
     textAlign: "center",
