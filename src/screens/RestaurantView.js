@@ -54,6 +54,7 @@ const RestaurantView = ({ route, navigation }) => {
             name="keyboard-arrow-left"
             size={35}
             color="white"
+            onPress={() =>navigation.goBack()}
           />
         </View>
       </ImageBackground>

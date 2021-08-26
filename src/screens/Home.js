@@ -95,7 +95,7 @@ export default function Home({ navigation }) {
             fontSize: 16,
             marginLeft: 15,
             fontWeight: "bold",
-            marginTop: 5,
+            marginTop:50,
           }}
         >
           Explorar categorias
@@ -130,7 +130,7 @@ export default function Home({ navigation }) {
           color: "#4A69FF",
           fontSize: 16,
           fontWeight: "bold",
-          marginTop: 25,
+          marginTop: 60,
           marginLeft: 15,
         }}
       >
